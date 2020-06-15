@@ -1,4 +1,4 @@
-// camel-k: language=java
+// camel-k: language=java trait=quarkus.enabled=true trait=prometheus.enabled=true dependency=github:astefanutti:camel-k-example-metrics:master-SNAPSHOT
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
