@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.camel.quarkus</groupId>
-            <artifactId>camel-quarkus-microprofile-metrics-parent</artifactId>
+            <artifactId>camel-quarkus-microprofile-metrics</artifactId>
             <version>1.0.0-CR2</version>
         </dependency>
     </dependencies>
