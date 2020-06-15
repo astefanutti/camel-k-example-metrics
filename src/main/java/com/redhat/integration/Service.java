@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+package com.redhat.integration;
+
 import java.util.Random;
 
 import org.apache.camel.Exchange;

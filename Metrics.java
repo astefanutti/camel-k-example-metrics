@@ -24,6 +24,8 @@ import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConsta
 
 import javax.enterprise.context.ApplicationScoped;
 
+import com.redhat.integration.Service;
+
 /**
  * This example registers the following metrics:
  * <ul>
