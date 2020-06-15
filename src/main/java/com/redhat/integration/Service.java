@@ -33,6 +33,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
+@io.quarkus.arc.Unremovable
 public class Service implements Processor {
 
     @Override
