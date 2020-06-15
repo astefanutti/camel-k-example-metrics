@@ -17,12 +17,17 @@
 
 import java.util.Random;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.RuntimeExchangeException;
 
+import org.eclipse.microprofile.metrics.Gauge;
+import org.eclipse.microprofile.metrics.Meter;
+
 import org.eclipse.microprofile.metrics.annotation.Metered;
+import org.eclipse.microprofile.metrics.annotation.Metric;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class Service {
@@ -33,5 +38,13 @@ public class Service {
         if (rand.nextDouble() < 0.5) {
             throw new RuntimeExchangeException("Random failure", exchange);
         }
+    }
+
+    @Produces
+    @ApplicationScoped
+    @Metric(name = "success-ratio")
+    // Register a custom gauge that's the ratio of the 'success' meter on the 'generated' meter
+    Gauge<Double> successRatio(@Metric(name = "success") Meter success, @Metric(name = "generated") Meter generated) {
+        return () -> success.getOneMinuteRate() / generated.getOneMinuteRate();
     }
 }

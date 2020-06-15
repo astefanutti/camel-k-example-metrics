@@ -22,13 +22,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConstants;
 
-import org.eclipse.microprofile.metrics.Gauge;
-import org.eclipse.microprofile.metrics.Meter;
-import org.eclipse.microprofile.metrics.annotation.Metered;
-import org.eclipse.microprofile.metrics.annotation.Metric;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 
 /**
  * This example registers the following metrics:
@@ -78,13 +72,5 @@ public class Metrics extends RouteBuilder {
             .log("Successfully processed ${body}")
             // The 'success' meter
             .to("microprofile-metrics:meter:success");
-    }
-
-    @Produces
-    @ApplicationScoped
-    @Metric(name = "success-ratio")
-    // Register a custom gauge that's the ratio of the 'success' meter on the 'generated' meter
-    Gauge<Double> successRatio(Meter success, Meter generated) {
-        return () -> success.getOneMinuteRate() / generated.getOneMinuteRate();
     }
 }
