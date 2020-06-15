@@ -17,12 +17,11 @@
  * limitations under the License.
  */
 
+import org.apache.camel.BeanInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConstants;
-
-import javax.inject.Inject;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -47,7 +46,7 @@ import com.redhat.integration.Service;
 @ApplicationScoped
 public class Metrics extends RouteBuilder {
 
-    @Inject
+    @BeanInject
     Service service;
 
     @Override
