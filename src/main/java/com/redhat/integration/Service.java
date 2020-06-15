@@ -31,7 +31,9 @@ import org.eclipse.microprofile.metrics.annotation.Metric;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 
+@Named("service")
 @ApplicationScoped
 @io.quarkus.arc.Unremovable
 public class Service implements Processor {

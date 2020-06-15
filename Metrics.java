@@ -46,7 +46,7 @@ import com.redhat.integration.Service;
 @ApplicationScoped
 public class Metrics extends RouteBuilder {
 
-    @BeanInject
+    @BeanInject("service")
     Service service;
 
     @Override
