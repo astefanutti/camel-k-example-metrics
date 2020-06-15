@@ -34,7 +34,7 @@ import javax.enterprise.inject.Produces;
 @ApplicationScoped
 public class Service {
 
-    @Metered
+    @Metered(absolute = true)
     public void attempt(Exchange exchange) {
         Random rand = new Random();
         if (rand.nextDouble() < 0.5) {
@@ -44,9 +44,9 @@ public class Service {
 
     @Produces
     @ApplicationScoped
-    @Metric(name = "success-ratio")
+    @Metric(name = "success-ratio", absolute = true)
     // Register a custom gauge that's the ratio of the 'success' meter on the 'generated' meter
-    Gauge<Double> successRatio(@Metric(name = "success") Meter success, @Metric(name = "generated") Meter generated) {
+    Gauge<Double> successRatio(@Metric(name = "success", absolute = true) Meter success, @Metric(name = "generated", absolute = true) Meter generated) {
         return () -> success.getOneMinuteRate() / generated.getOneMinuteRate();
     }
 }
