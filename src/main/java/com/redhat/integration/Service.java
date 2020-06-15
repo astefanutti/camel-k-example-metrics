@@ -20,6 +20,7 @@ package com.redhat.integration;
 import java.util.Random;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.RuntimeExchangeException;
 
 import org.eclipse.microprofile.metrics.Gauge;
@@ -32,10 +33,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
-public class Service {
+public class Service implements Processor {
 
-    @Metered(absolute = true)
-    public void attempt(Exchange exchange) {
+    @Override
+    @Metered(name = "attempt", absolute = true)
+    public void process(Exchange exchange) {
         Random rand = new Random();
         if (rand.nextDouble() < 0.5) {
             throw new RuntimeExchangeException("Random failure", exchange);
