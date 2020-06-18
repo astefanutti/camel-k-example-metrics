@@ -32,6 +32,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
+// TODO: to be removed as soon as it's possible to add `quarkus.arc.remove-unused-beans=framework` to Quarkus build configuration in Camel K
 @io.quarkus.arc.Unremovable
 public class Service {
 
