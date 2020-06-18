@@ -47,11 +47,11 @@ public class Service implements Processor {
         }
     }
 
-    @Produces
-    @ApplicationScoped
-    @Metric(name = "success-ratio", absolute = true)
-    // Register a custom gauge that's the ratio of the 'success' meter on the 'generated' meter
-    Gauge<Double> successRatio(@Metric(name = "success", absolute = true) Meter success, @Metric(name = "generated", absolute = true) Meter generated) {
-        return () -> success.getOneMinuteRate() / generated.getOneMinuteRate();
-    }
+    // @Produces
+    // @ApplicationScoped
+    // @Metric(name = "success-ratio", absolute = true)
+    // // Register a custom gauge that's the ratio of the 'success' meter on the 'generated' meter
+    // Gauge<Double> successRatio(@Metric(name = "success", absolute = true) Meter success, @Metric(name = "generated", absolute = true) Meter generated) {
+    //     return () -> success.getOneMinuteRate() / generated.getOneMinuteRate();
+    // }
 }
