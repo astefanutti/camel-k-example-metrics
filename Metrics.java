@@ -17,15 +17,12 @@
  * limitations under the License.
  */
 
-import org.apache.camel.BeanInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConstants;
 
 import javax.enterprise.context.ApplicationScoped;
-
-import com.redhat.integration.Service;
 
 /**
  * This example registers the following metrics:
@@ -46,9 +43,6 @@ import com.redhat.integration.Service;
 @ApplicationScoped
 public class Metrics extends RouteBuilder {
 
-    @BeanInject("service")
-    Service service;
-
     @Override
     public void configure() {
         onException()
@@ -68,7 +62,7 @@ public class Metrics extends RouteBuilder {
             // The 'generated' meter
             .to("microprofile-metrics:meter:generated")
             // The 'attempt' meter via @Metered interceptor
-            .process(service)
+            .process("service")
             .filter(header(Exchange.REDELIVERED))
                 .log(LoggingLevel.WARN, "Processed ${body} after ${header.CamelRedeliveryCounter} retries")
                 .setHeader(MicroProfileMetricsConstants.HEADER_METER_MARK, header(Exchange.REDELIVERY_COUNTER))
