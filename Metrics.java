@@ -24,6 +24,8 @@ import org.apache.camel.component.microprofile.metrics.MicroProfileMetricsConsta
 
 import javax.enterprise.context.ApplicationScoped;
 
+import com.redhat.integration.Service;
+
 /**
  * This example registers the following metrics:
  * <ul>
@@ -62,7 +64,7 @@ public class Metrics extends RouteBuilder {
             // The 'generated' meter
             .to("microprofile-metrics:meter:generated")
             // The 'attempt' meter via @Metered interceptor
-            .bean("service")
+            .bean(Service.class)
             .filter(header(Exchange.REDELIVERED))
                 .log(LoggingLevel.WARN, "Processed ${body} after ${header.CamelRedeliveryCounter} retries")
                 .setHeader(MicroProfileMetricsConstants.HEADER_METER_MARK, header(Exchange.REDELIVERY_COUNTER))
