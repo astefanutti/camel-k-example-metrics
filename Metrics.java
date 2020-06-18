@@ -62,7 +62,7 @@ public class Metrics extends RouteBuilder {
             // The 'generated' meter
             .to("microprofile-metrics:meter:generated")
             // The 'attempt' meter via @Metered interceptor
-            .process("service")
+            .bean("service")
             .filter(header(Exchange.REDELIVERED))
                 .log(LoggingLevel.WARN, "Processed ${body} after ${header.CamelRedeliveryCounter} retries")
                 .setHeader(MicroProfileMetricsConstants.HEADER_METER_MARK, header(Exchange.REDELIVERY_COUNTER))
